@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <div class="title">{{ msg }}</div>
     <div class="main">
       <div class="toggle-button-wrapper">
         <div class="radio-btn checkedRadio"><i><input type="radio" name="radio-btn" checked=""></i></div>
@@ -501,6 +501,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'T',
   props: {
@@ -510,7 +511,20 @@ export default {
     return{
 
     }
+  },
+  mounted () {
+    this.getHomeinfo()
+  },
+  methods: {
+    getHomeinfo () {
+      axios.get('/api/index.json')
+          .then(this.getHomeinfoSucc)
+    },
+    getHomeinfoSucc (res) {
+      console.log(res)
+    }
   }
+
 }
 </script>
 
