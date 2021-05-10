@@ -5,22 +5,20 @@
       <div class="toggle-button-wrapper">
         <div class="radio-btn checkedRadio"><i><input type="radio" name="radio-btn" checked=""></i></div>
         <p style="margin-right: 5px; color: #0ebd87">我要</p>
-        <div class="radio-btn off"><i><input type="radio" name="radio-btn" checked=""></i></div>
-        <p style="color: #ff460c;">我不要</p>
-
-
-        <p style="float: left;line-height: 30px;margin: 0 2px;" class="hidden-xs">点击"我不要"后，选取的关键词就会被搜索结果排除。</p>
+        <!--        <div class="radio-btn off"><i><input type="radio" name="radio-btn" checked=""></i></div>-->
+        <!--        <p style="color: #ff460c;">我不要</p>-->
+        <!--        <p style="float: left;line-height: 30px;margin: 0 2px;" class="hidden-xs">点击"我不要"后，选取的关键词就会被搜索结果排除。</p>-->
         <!--                <a  href="/ds_search.html" target="_blank" class="form-control-new" style="border: 1px solid #36a2be;float: right;margin: 1px 10px;color: #36a2be;">新<span class=" hidden-xs">搜索页</span></a>-->
-        <select id="history" class="form-control" style="width: 117px;float: right;" name="历史记录">
-          <option value="">历史记录</option>
-          <option value="1">记录(一键清空)</option>
-        </select>
-        <select id="time" class="form-control" style="margin-right: 10px;width: 75px;float: right;">
-          <option value="30" name="">一月内</option>
-          <option value="7" name="">一周内</option>
-          <option value="1" name="">一天内</option>
-          <option value="0" name="">搜索时间范围不限</option>
-        </select>
+        <!--        <select id="history" class="form-control" style="width: 117px;float: right;" name="历史记录">-->
+        <!--          <option value="">历史记录</option>-->
+        <!--          <option value="1">记录(一键清空)</option>-->
+        <!--        </select>-->
+        <!--        <select id="time" class="form-control" style="margin-right: 10px;width: 75px;float: right;">-->
+        <!--          <option value="30" name="">一月内</option>-->
+        <!--          <option value="7" name="">一周内</option>-->
+        <!--          <option value="1" name="">一天内</option>-->
+        <!--          <option value="0" name="">搜索时间范围不限</option>-->
+        <!--        </select>-->
         <div class="clean"></div>
       </div>
       <div class="search">
@@ -440,20 +438,20 @@
           <span style="float: left;line-height: 34px;">--</span>
           <input id="maxPrice" class="form-control search-sel" style="max-width: 14%;;">
           <p style="line-height: 17px;font-weight: normal;">
-            <input id="ignorePriceFlag" type="checkbox" style="float: left;margin-left: 2px;" checked="checked"><span
-              style="float: left;">显示价格未识别号</span><br>
+<!--            <input id="ignorePriceFlag" type="checkbox" style="float: left;margin-left: 2px;" checked="checked"><span-->
+<!--              style="float: left;">显示价格未识别号</span><br>-->
             <span style="">(价格功能不推荐)</span>
           </p>
         </div>
+        <!--        <div class="hang-100">-->
+        <!--          <p>设置</p>-->
+        <!--          <p><input id="filters" type="checkbox" style="float: left;margin: 11px 0 0;" checked="checked"><span-->
+        <!--              style="float: left;">隐藏无用字符</span></p>-->
+        <!--          <p><input id="daishou" type="checkbox" style="float: left;margin: 11px 0 0;"><span-->
+        <!--              style="float: left;">屏蔽代售</span></p>-->
+        <!--        </div>-->
         <div class="hang-100">
-          <p>设置</p>
-          <p><input id="filters" type="checkbox" style="float: left;margin: 11px 0 0;" checked="checked"><span
-              style="float: left;">隐藏无用字符</span></p>
-          <p><input id="daishou" type="checkbox" style="float: left;margin: 11px 0 0;"><span
-              style="float: left;">屏蔽代售</span></p>
-        </div>
-        <div class="hang-100">
-          <button id="keyword" class="btn btn-info btn-sm">搜索</button>
+          <button id="keyword" class="btn btn-info btn-sm" v-on:click="search()">搜索</button>
           <button id="clearkey" class="btn btn-default btn-sm" style="margin-left: 10px;">一键清除</button>
           <!-- <button id="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal-add">机器人冻结中</button>-->
           <div class="modal fade" id="myModal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -476,13 +474,56 @@
             </div><!-- /.modal -->
           </div>
           <!--卖号-->
-          <a href="/release.html" class="btn btn-warning btn-xm" style="margin-left: 10px;">自主站内发布</a>
-          <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">我要卖号丨免定</button>
+          <!--          <a href="/release.html" class="btn btn-warning btn-xm" style="margin-left: 10px;">自主站内发布</a>-->
+          <!--          <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">我要卖号丨免定</button>-->
 
         </div>
 
+        <div id="qinghua_table">
+          <table class="table" id="qh_table"></table>
 
+          <el-table
+              :data="tableData"
+              style="width: 100%">
+            <el-table-column
+                prop="id"
+                label="ID"
+                width="80">
+              <!--                width="80" :formatter="stateFormat">-->
+              <template v-slot="scope">
+                <a :href="'http://www.qhuads.com/h-pd-'+scope.row.id+'.html'"
+                   target="_blank"
+                   class="buttonText">详情</a>
+              </template>
 
+            </el-table-column>
+            <el-table-column
+                prop="title"
+                label="编号"
+                width="80">
+            </el-table-column>
+            <el-table-column
+                prop="price"
+                label="价格"
+                width="80">
+            </el-table-column>
+            <el-table-column
+                prop="description"
+                label="描述">
+            </el-table-column>
+          </el-table>
+          <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="pageNum"
+              :page-sizes="[10, 20, 30, 50, 100]"
+              :page-size="pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="totleNum">
+          </el-pagination>
+
+          <!--          <table class="table" id="table"></table>-->
+        </div>
         <div id="tieba_table">
           <table class="table" id="ds_table"></table>
           <table class="table" id="table"></table>
@@ -502,33 +543,251 @@
 
 <script>
 import axios from 'axios'
+import $ from 'jquery'
+
 export default {
   name: 'T',
   props: {
     msg: String
   },
-  data(){
-    return{
+  data() {
+    return {
+      tableData: [],
+
+      totleNum: 1,
+      // 当前页
+      pageNum: 1,
+      // 每页多少条
+      pageSize: 10
 
     }
   },
-  mounted () {
-    this.getHomeinfo()
+  mounted() {
+    // this.getHomeinfo()
+    $("#area1").bind("change", function () {
+      $("#area2").val('');
+      $("#area3").val('');
+      var name = $(this).find("option:selected").attr('name');
+      if (name != 0) {
+        $("#area2").children().hide();
+        $("#area3").children().hide();
+        $("[name='" + name + "']").show();
+        $("[name='0']").show();
+      } else {
+        $("#area2").children().show();
+      }
+    });
+    $("#area2").bind("change", function () {
+      $("#area3").val('');
+      var names = $(this).find("option:selected").attr('names');
+      if (names != 0) {
+        $("#area3").children().hide();
+        $("[names='" + names + "']").show();
+        $("[name='0']").show();
+      } else {
+        $("#area3").children().show();
+      }
+    });
+    //下拉框选择
+    $(".key-choose").bind("change", function () {
+      var id = $(this).attr('id');
+      var vaule = $(this).find("option:selected").val();
+      var text = $(this).find("option:selected").text();
+      console.log($(this).find("option:selected").text());
+      if (vaule != null) {
+        //if( $(".off").css("display") =='none'){
+        if ($(".off").hasClass("checkedRadio") == false) {
+          $("." + id).append("<a class='choosed btn btn-info key-must' data-name=" + vaule + ">" + text + "</a>");
+          $(" .key-choose option[value='" + vaule + "']").attr("disabled", "disabled");
+        } else {
+          $("." + id).append("<a class='unchoosed btn btn-danger' data-name=" + vaule + ">" + text + "</a>");
+          $(" .key-choose option[value='" + vaule + "']").attr("disabled", "disabled");
+        }
+
+        $(".choosed").bind("click", function () {
+          var uid = $(this).attr('data-name');
+          $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+          $(this).remove();
+        });
+        $(".unchoosed").bind("click", function () {
+          var uid = $(this).attr('data-name');
+          $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+          $(this).remove();
+        });
+      }
+      $(this).val('');
+    });
+    //手写框添加
+    $("#key-add").bind("click", function () {
+      var text = $('#ket-text').val();
+      if (text) {
+        //if( $(".off").css("display") =='none'){
+        if ($(".off").hasClass("checkedRadio") == false) {
+          $(".ket-text").append("<a class='choosed btn btn-info' data-name=" + text + ">" + text + "</a>");
+        } else {
+          $(".ket-text").append("<a class='unchoosed btn btn-danger' data-name=" + text + ">" + text + "</a>");
+        }
+
+        $(".choosed").bind("click", function () {
+          var uid = $(this).attr('data-name');
+          $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+          $(this).remove();
+        });
+        $(".unchoosed").bind("click", function () {
+          var uid = $(this).attr('data-name');
+          $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+          $(this).remove();
+        });
+      }
+    });
+    //一键清除
+    $("#clearkey").bind("click", function () {
+      $('#school').val('0');
+      $('#figure').val('0');
+      $('#area1').val('');
+      $('#area2').val('');
+      $('#area3').val('');
+      $('.choosed').each(function () {
+        var uid = $(this).attr('data-name');
+        $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+        $(this).remove();
+      });
+      $('.unchoosed').each(function () {
+        var uid = $(this).attr('data-name');
+        $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+        $(this).remove();
+      });
+    });
+    $(".choosed").bind("click", function () {
+      var uid = $(this).attr('data-name');
+      $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+      $(this).remove();
+    });
+    $(".unchoosed").bind("click", function () {
+      var uid = $(this).attr('data-name');
+      $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+      $(this).remove();
+    })
+
+
   },
   methods: {
-    getHomeinfo () {
+    stateFormat(row) {
+      return "http://www.qhuads.com/h-pd-" + row.id + ".html"
+    },
+
+    getHomeinfo() {
       axios.get('/api/index.json')
           .then(this.getHomeinfoSucc)
     },
-    getHomeinfoSucc (res) {
+    chooseClean() {
+      $(".choosed").bind("click", function () {
+        var uid = $(this).attr('data-name');
+        $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+        $(this).remove();
+      });
+      $(".unchoosed").bind("click", function () {
+        var uid = $(this).attr('data-name');
+        $(" .key-choose option[value='" + uid + "']").removeAttr("disabled");
+        $(this).remove();
+      });
+    },
+    getHomeinfoSucc(res) {
       console.log(res)
+    }, search() {
+      //区服
+      var area = new Array();
+      area.push($("#area1").val() || '不限');
+      area.push($("#area2").val() || '不限');
+      area.push($("#area3").val() || '不限');
+      // var area_history = '';
+      // $.each(area, function (i, result) {
+      //
+      //   if (result != '不限') {
+      //     $.each(area_data[i], function (a, result) {
+      //       if (result.label != area[i]) {
+      //         area_history = area_history + result.label + ',';
+      //       }
+      //     });
+      //   }
+      // });
+      console.log(area);
+      var condition = new Array();
+      var exterior = '';
+      $('.choosed').each(function () {
+        exterior = $(this).attr("data-name") + ',' + exterior;
+        condition.push($(this).attr("data-name"));
+      });
+      // console.log($("#school option:selected").text());
+      if ($("#area2").val()!="0")condition.push($("#school option:selected").text() );
+      if ($("#area3").val()!="0")condition.push($("#school option:selected").text() );
+      if ($("#school").val()!="0")condition.push($("#school option:selected").text() );
+      if ($("#figure").val()!="0")condition.push($("#figure option:selected").text() );
+      // condition.push($("#figure").attr("name") );
+      // var filter = area_history;
+      // var filter_history = '';
+      // $('.unchoosed').each(function () {
+      //   filter = 'strings='+$(this).attr("data-name") + '&' + filter;
+      //   filter_history = $(this).attr("data-name") + ',' + filter_history;
+      // });
+      // var navType = $(".content-type .active").attr("index");
+
+      // ds_initTable(exterior.substring(0, exterior.length - 1), filter.substring(0, filter.length - 1));
+      // initTable(exterior.substring(0, exterior.length - 1), filter.substring(0, filter.length - 1));
+
+      // $('html,body').animate({scrollTop: $('#contenttypenav2').offset().top}, 500);
+      //记录历史
+      // var news = {
+      //   exterior: exterior.substring(0, exterior.length - 1),
+      //   filter: filter_history.substring(0, filter_history.length - 1),
+      //   school: $("#school").find("option:selected").text(),
+      //   figure: $("#figure").find("option:selected").text(),
+      //   area1: $("#area1").find("option:selected").text(),
+      //   area2: $("#area2").find("option:selected").text(),
+      //   area3: $("#area3").find("option:selected").text(),
+      //   minPrice: $("#minPrice").val(),
+      //   maxPrice: $("#maxPrice").val()
+      // };
+      // historyAdd($("#school").find("option:selected").text()+','+$("#figure").find("option:selected").text()+','+exterior.substring(0,exterior.length-1)+'/');
+      // historyAdd(news);
+      const that = this;
+      axios.post('http://111.229.29.74:8081/test', {
+            "strings": condition,
+            "pageNum": that.pageNum,
+            "pageSize": that.pageSize,
+            "minPrice": $("#minPrice").val(),
+            "maxPrice": $("#maxPrice").val()
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Headers": "X-Requested-With",
+              "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS"
+            }
+          }
+      ).then(function (response) {
+        that.tableData = response.data.list;
+        that.totleNum = response.data.total;
+        console.log(response);
+      })
+          .catch(function (error) {
+            console.log(error);
+          });
+    },
+    handleSizeChange(val) {
+      this.pageSize = val;
+      this.search();
+    },
+    handleCurrentChange(val) {
+      this.pageNum = val;
+      this.search();
     }
   }
 
 }
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
@@ -623,7 +882,7 @@ header {
   background-color: white;
   padding: 15px 10px;
   min-height: 800px;
-  width: 50%;
+  width: 100%;
 }
 
 .aside {
