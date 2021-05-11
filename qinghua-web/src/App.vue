@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
-    <router-link to="/">首页</router-link>
-<!--    <router-link to="/about">About</router-link>-->
+    <router-link to="/">情画代售</router-link>
+<!--        <router-link to="/about">About</router-link>-->
   </div>
   <router-view/>
 </template>
@@ -16,7 +16,16 @@
 }
 
 #nav {
-  padding: 30px;
+  //padding: 30px;
+
+  height: 60px;
+  border-top: 1px solid #e4ebf4;
+  border-bottom: 1px solid #e4ebf4;
+  margin-bottom: 20px;
+  font-size: 28px;
+  line-height: 60px;
+  font-weight: normal;
+  color: #595959;
 
   a {
     font-weight: bold;

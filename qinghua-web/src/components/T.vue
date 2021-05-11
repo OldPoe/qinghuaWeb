@@ -1,30 +1,18 @@
 <template>
   <div class="hello">
-    <div class="title">{{ msg }}</div>
+<!--    <div class="title">{{ msg }}</div>-->
     <div class="main">
       <div class="toggle-button-wrapper">
         <div class="radio-btn checkedRadio"><i><input type="radio" name="radio-btn" checked=""></i></div>
         <p style="margin-right: 5px; color: #0ebd87">我要</p>
-        <!--        <div class="radio-btn off"><i><input type="radio" name="radio-btn" checked=""></i></div>-->
-        <!--        <p style="color: #ff460c;">我不要</p>-->
-        <!--        <p style="float: left;line-height: 30px;margin: 0 2px;" class="hidden-xs">点击"我不要"后，选取的关键词就会被搜索结果排除。</p>-->
-        <!--                <a  href="/ds_search.html" target="_blank" class="form-control-new" style="border: 1px solid #36a2be;float: right;margin: 1px 10px;color: #36a2be;">新<span class=" hidden-xs">搜索页</span></a>-->
-        <!--        <select id="history" class="form-control" style="width: 117px;float: right;" name="历史记录">-->
-        <!--          <option value="">历史记录</option>-->
-        <!--          <option value="1">记录(一键清空)</option>-->
-        <!--        </select>-->
-        <!--        <select id="time" class="form-control" style="margin-right: 10px;width: 75px;float: right;">-->
-        <!--          <option value="30" name="">一月内</option>-->
-        <!--          <option value="7" name="">一周内</option>-->
-        <!--          <option value="1" name="">一天内</option>-->
-        <!--          <option value="0" name="">搜索时间范围不限</option>-->
-        <!--        </select>-->
         <div class="clean"></div>
       </div>
       <div class="search">
         <p>体型</p>
-        <select id="school" class="form-control search-sel" style="margin-right: 10px;">
+        <select id="sect" class="form-control search-sel" style="margin-right: 10px;">
           <option value="0" name="全部门派">全部门派</option>
+          <option value="17" name="大侠">大侠</option>
+          <option value="16" name="衍天宗">衍天宗</option>
           <option value="15" name="凌雪阁">凌雪阁</option>
           <option value="14" name="蓬莱">蓬莱</option>
           <option value="1" name="霸刀">霸刀</option>
@@ -41,15 +29,15 @@
           <option value="12" name="七秀">七秀</option>
           <option value="13" name="万花">万花</option>
         </select>
-        <select id="figure" class="form-control search-sel" style="margin-right: 10px;">
+        <select id="shape" class="form-control search-sel" style="margin-right: 10px;">
           <option value="0" name="全部体型">全部体型</option>
-          <option value="4" name="萝莉">萝莉</option>
-          <option value="2" name="成女">成女</option>
           <option value="1" name="成男">成男</option>
-          <option value="3" name="正太">正太</option>
+          <option value="2" name="成女">成女</option>
+          <option value="3" name="萝莉">萝莉</option>
+          <option value="4" name="正太">正太</option>
         </select>
-        <a href="/explain.html" target="_blank"
-           style="color: #36a2be; font-size: 11px; font-weight: normal; line-height: 34px;"><strong>？</strong>如何使用</a>
+<!--        <a href="/explain.html" target="_blank"-->
+<!--           style="color: #36a2be; font-size: 11px; font-weight: normal; line-height: 34px;"><strong>？</strong>如何使用</a>-->
         <div class="clean"></div>
       </div>
       <div class="search" style="width: 100%;">
@@ -438,22 +426,12 @@
           <span style="float: left;line-height: 34px;">--</span>
           <input id="maxPrice" class="form-control search-sel" style="max-width: 14%;;">
           <p style="line-height: 17px;font-weight: normal;">
-<!--            <input id="ignorePriceFlag" type="checkbox" style="float: left;margin-left: 2px;" checked="checked"><span-->
-<!--              style="float: left;">显示价格未识别号</span><br>-->
             <span style="">(价格功能不推荐)</span>
           </p>
         </div>
-        <!--        <div class="hang-100">-->
-        <!--          <p>设置</p>-->
-        <!--          <p><input id="filters" type="checkbox" style="float: left;margin: 11px 0 0;" checked="checked"><span-->
-        <!--              style="float: left;">隐藏无用字符</span></p>-->
-        <!--          <p><input id="daishou" type="checkbox" style="float: left;margin: 11px 0 0;"><span-->
-        <!--              style="float: left;">屏蔽代售</span></p>-->
-        <!--        </div>-->
         <div class="hang-100">
           <button id="keyword" class="btn btn-info btn-sm" v-on:click="search()">搜索</button>
           <button id="clearkey" class="btn btn-default btn-sm" style="margin-left: 10px;">一键清除</button>
-          <!-- <button id="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal-add">机器人冻结中</button>-->
           <div class="modal fade" id="myModal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                aria-hidden="true">
             <div class="modal-dialog">
@@ -473,9 +451,6 @@
               </div><!-- /.modal-content -->
             </div><!-- /.modal -->
           </div>
-          <!--卖号-->
-          <!--          <a href="/release.html" class="btn btn-warning btn-xm" style="margin-left: 10px;">自主站内发布</a>-->
-          <!--          <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">我要卖号丨免定</button>-->
 
         </div>
 
@@ -487,8 +462,8 @@
               style="width: 100%">
             <el-table-column
                 prop="id"
-                label="ID"
-                width="80">
+                label="链接"
+                width="45">
               <!--                width="80" :formatter="stateFormat">-->
               <template v-slot="scope">
                 <a :href="'http://www.qhuads.com/h-pd-'+scope.row.id+'.html'"
@@ -497,15 +472,15 @@
               </template>
 
             </el-table-column>
-            <el-table-column
-                prop="title"
-                label="编号"
-                width="80">
-            </el-table-column>
+<!--            <el-table-column-->
+<!--                prop="title"-->
+<!--                label="编号"-->
+<!--                width="80">-->
+<!--            </el-table-column>-->
             <el-table-column
                 prop="price"
                 label="价格"
-                width="80">
+                width="60">
             </el-table-column>
             <el-table-column
                 prop="description"
@@ -553,7 +528,24 @@ export default {
   data() {
     return {
       tableData: [],
-
+      sect:[[],
+        ["刀","刀爹","刀娘","刀萝","刀太"],
+        ["琴","琴爹","琴娘","琴萝","琴太"],
+        ["苍","苍爹","盾娘","盾萝","盾太"],
+        ["丐","丐哥","丐姐","丐萝","丐太"],
+        ["喵","喵哥","喵姐","喵萝","喵太"],
+        ["炮","炮哥","炮姐","炮萝","炮太"],
+        ["毒","毒姐","毒哥","毒萝","毒太"],
+        ["二","二少","二小姐","叽萝","叽太"],
+        ["军","军爷","军娘","军萝","军太"],
+        ["道","道长","道姑","咩萝","咩太"],
+        ["","大师","","","小和尚"],
+        ["秀","秀","秀姐","秀萝","秀太"],
+        ["花","花姐","花哥","花萝","花太"],
+        ["伞","伞爹","伞娘","伞萝","伞太"],
+        ["雪","雪爹","雪娘","雪萝","雪太"],
+        ["灯","灯爹","灯姐","灯萝","灯太"],
+        ["侠","侠男","侠女","侠萝","侠太"]],
       totleNum: 1,
       // 当前页
       pageNum: 1,
@@ -642,8 +634,8 @@ export default {
     });
     //一键清除
     $("#clearkey").bind("click", function () {
-      $('#school').val('0');
-      $('#figure').val('0');
+      $('#sect').val('0');
+      $('#shape').val('0');
       $('#area1').val('');
       $('#area2').val('');
       $('#area3').val('');
@@ -695,6 +687,7 @@ export default {
     getHomeinfoSucc(res) {
       console.log(res)
     }, search() {
+      const that = this;
       //区服
       var area = new Array();
       area.push($("#area1").val() || '不限');
@@ -711,19 +704,23 @@ export default {
       //     });
       //   }
       // });
-      console.log(area);
+      // console.log(area);
       var condition = new Array();
       var exterior = '';
       $('.choosed').each(function () {
         exterior = $(this).attr("data-name") + ',' + exterior;
         condition.push($(this).attr("data-name"));
       });
-      // console.log($("#school option:selected").text());
-      if ($("#area2").val()!="0")condition.push($("#school option:selected").text() );
-      if ($("#area3").val()!="0")condition.push($("#school option:selected").text() );
-      if ($("#school").val()!="0")condition.push($("#school option:selected").text() );
-      if ($("#figure").val()!="0")condition.push($("#figure option:selected").text() );
-      // condition.push($("#figure").attr("name") );
+      // console.log($("#area2 option:selected").text());
+      // console.log($("#area2 option:selected"));
+      if ($("#area2 option:selected").text()!="不限")condition.push($("#area2 option:selected").text() );
+      if ($("#area3 option:selected").text()!="不限")condition.push($("#area3 option:selected").text() );
+      if ($("#sect").val()!="0"){
+        console.log(that.sect[$("#sect option:selected").val()][$("#shape  option:selected").val()])
+        condition.push(that.sect[$("#sect option:selected").val()][$("#shape").val()]);
+      }
+      // if ($("#shape").val()!="0")condition.push($("#shape option:selected").text() );
+      // condition.push($("#shape").attr("name") );
       // var filter = area_history;
       // var filter_history = '';
       // $('.unchoosed').each(function () {
@@ -740,18 +737,18 @@ export default {
       // var news = {
       //   exterior: exterior.substring(0, exterior.length - 1),
       //   filter: filter_history.substring(0, filter_history.length - 1),
-      //   school: $("#school").find("option:selected").text(),
-      //   figure: $("#figure").find("option:selected").text(),
+      //   sect: $("#sect").find("option:selected").text(),
+      //   shape: $("#shape").find("option:selected").text(),
       //   area1: $("#area1").find("option:selected").text(),
       //   area2: $("#area2").find("option:selected").text(),
       //   area3: $("#area3").find("option:selected").text(),
       //   minPrice: $("#minPrice").val(),
       //   maxPrice: $("#maxPrice").val()
       // };
-      // historyAdd($("#school").find("option:selected").text()+','+$("#figure").find("option:selected").text()+','+exterior.substring(0,exterior.length-1)+'/');
+      // historyAdd($("#sect").find("option:selected").text()+','+$("#shape").find("option:selected").text()+','+exterior.substring(0,exterior.length-1)+'/');
       // historyAdd(news);
-      const that = this;
-      axios.post('http://111.229.29.74:8081/test', {
+
+      axios.post('http://111.229.29.74:8081/query', {
             "strings": condition,
             "pageNum": that.pageNum,
             "pageSize": that.pageSize,
@@ -768,7 +765,7 @@ export default {
       ).then(function (response) {
         that.tableData = response.data.list;
         that.totleNum = response.data.total;
-        console.log(response);
+        // console.log(response);
       })
           .catch(function (error) {
             console.log(error);
@@ -878,6 +875,7 @@ header {
 }
 
 .main {
+  /*margin:0 auto;*/
   float: left;
   background-color: white;
   padding: 15px 10px;
@@ -1530,7 +1528,7 @@ a:hover {
   width: 65px;
 }
 
-#area1, #area2, #area3, #school, #figure {
+#area1, #area2, #area3, #sect, #shape {
   padding: .2em .1em .2em;
 }
 
