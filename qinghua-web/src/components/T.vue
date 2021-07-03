@@ -4,7 +4,19 @@
     <div class="main">
       <div class="toggle-button-wrapper">
         <div class="radio-btn checkedRadio"><i><input type="radio" name="radio-btn" checked=""></i></div>
-        <p style="margin-right: 5px; color: #0ebd87">我要</p>
+        <p style="margin-right: 5px; color: #36d4fc">我要</p>
+<!--        <div class="radio-btn checkedRadio"><i><input type="radio" name="radio-btn" checked=""></i></div>-->
+<!--        <p style="margin-right: 5px; color: #0ebd87">我要</p>-->
+        <div  style="margin-right: 5px; float: left;font-weight: bold;  "  class=" btn btn-info btn-sm serOnline-list-v lineH-21  ">
+          <a  rel="nofollow"  href="//wpa.qq.com/msgrd?v=3&amp;uin=896940295&amp;site=qq&amp;menu=yes" target="_blank">
+           我要估价
+          </a>
+        </div>
+        <div  style="margin-right: 5px; float: left; font-weight: bold; "  class=" btn btn-info btn-sm serOnline-list-v lineH-21  ">
+          <a  rel="nofollow"  href="http://yingkebao.top/web/formview/5cb57d3ffc918f7d19b7d19a" target="_blank">
+            我要卖号
+          </a>
+        </div>
         <div class="clean"></div>
       </div>
       <div class="search">
@@ -132,6 +144,8 @@
             <option value="鼠金">鼠金</option>
             <option value="苍金">苍金</option>
             <option value="如归乐金">如归乐金</option>
+            <option value="猫耳金">猫耳金</option>
+            <option value="漫卷云舒">漫卷云舒</option>
           </select>
           <div class="gold_hairs key-show col-xs-6"></div>
         </div>
@@ -429,8 +443,8 @@
             <span style="">(价格功能不推荐)</span>
           </p>
         </div>
-        <div class="hang-100">
-          <button id="keyword" class="btn btn-info btn-sm" v-on:click="search()">搜索</button>
+        <div class="hang-100" style="text-align: center;">
+          <button id="keyword" style="font-weight: bold;" class="btn btn-info btn-sm" v-on:click="search()">搜索</button>
           <button id="clearkey" class="btn btn-default btn-sm" style="margin-left: 10px;">一键清除</button>
           <div class="modal fade" id="myModal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                aria-hidden="true">
@@ -463,7 +477,7 @@
             <el-table-column
                 prop="id"
                 label="链接"
-                width="45">
+                width="60">
               <!--                width="80" :formatter="stateFormat">-->
               <template v-slot="scope">
                 <a :href="'http://www.qhuads.com/h-pd-'+scope.row.id+'.html'"
@@ -589,10 +603,10 @@ export default {
       if (vaule != null) {
         //if( $(".off").css("display") =='none'){
         if ($(".off").hasClass("checkedRadio") == false) {
-          $("." + id).append("<a class='choosed btn btn-info key-must' data-name=" + vaule + ">" + text + "</a>");
+          $("." + id).append("<a  style='font-weight: bold;' class='choosed btn btn-info key-must' data-name=" + vaule + ">" + text + "</a>");
           $(" .key-choose option[value='" + vaule + "']").attr("disabled", "disabled");
         } else {
-          $("." + id).append("<a class='unchoosed btn btn-danger' data-name=" + vaule + ">" + text + "</a>");
+          $("." + id).append("<a style='font-weight: bold;' class='unchoosed btn btn-danger' data-name=" + vaule + ">" + text + "</a>");
           $(" .key-choose option[value='" + vaule + "']").attr("disabled", "disabled");
         }
 
@@ -748,7 +762,7 @@ export default {
       // historyAdd($("#sect").find("option:selected").text()+','+$("#shape").find("option:selected").text()+','+exterior.substring(0,exterior.length-1)+'/');
       // historyAdd(news);
 
-      axios.post('http://111.229.29.74:8081/query', {
+      axios.post('http://47.98.63.86:8081/query', {
             "strings": condition,
             "pageNum": that.pageNum,
             "pageSize": that.pageSize,
@@ -786,6 +800,7 @@ export default {
 </script>
 
 <style scoped>
+
 h3 {
   margin: 40px 0 0;
 }
@@ -801,7 +816,7 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: #b942b3;
 }
 
 * {
@@ -821,13 +836,27 @@ html, body {
 }
 
 body {
-  background-color: #e7e8eb;
+  background-color: #e62222;
 }
 
 .coloe-red {
   color: red;
 }
-
+*.btn-info{
+  background-image: -webkit-linear-gradient(
+      190deg
+      , #fa7e5f 0%, #fa55ca 100%);
+  background-color: #f6d0c5 ;
+  border-color: #f5dad3;
+  width: 15%;
+}
+.btn-primary{
+  background-image: -webkit-linear-gradient(
+      190deg
+      , #f6d0c5 0%, #fbd2f6 100%);
+  background-color: #f6d0c5 ;
+  border-color: #f5dad3;
+}
 .search p {
   color: gray;
   font-size: 15px;
@@ -940,6 +969,9 @@ header {
   margin: 5px 0;
 }
 
+.serOnline-list-v  a {
+  color: rgba(255, 255, 255, 255);
+}
 .key-show {
   padding: 0;
   height: 34px;
@@ -947,6 +979,8 @@ header {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-left: 5px;
+  width: 50%;
+  position: relative;
 }
 
 .choosed {
@@ -956,6 +990,7 @@ header {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  background-color: #dddddd;
 }
 
 .unchoosed {
@@ -1440,6 +1475,7 @@ a:hover {
   overflow: unset;
   color: white;
   border-color: #46b8da;
+  background-color: #46b8da;
 }
 
 .hang-new .row-label .btn-danger {
@@ -1533,7 +1569,7 @@ a:hover {
 }
 
 #area1, #area2, #area3 {
-  width: 18%;
+  width: 8%;
 }
 
 .hang-new .row-title span {
@@ -1744,4 +1780,5 @@ a:hover {
   width: 97%;
   margin: auto;
 }
+
 </style>

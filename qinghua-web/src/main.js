@@ -15,9 +15,17 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'font-awesome/css/font-awesome.min.css'
 // import axios from 'axios'
 
-
+// App.config.devtools = true;
 const app = createApp(App)
+
 app.use(ElementPlus)
 app.use(store)
 app.use(router)
 app.mount('#app')
+router.beforeEach((to, from, next) => {
+    /* 路由发生变化修改页面title */
+    if (to.meta.title) {
+        document.title = to.meta.title
+    }
+    next()
+})
