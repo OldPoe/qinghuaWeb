@@ -480,7 +480,7 @@
                 width="60">
               <!--                width="80" :formatter="stateFormat">-->
               <template v-slot="scope">
-                <a :href="'http://www.qhuads.com/h-pd-'+scope.row.id+'.html'"
+                <a :href="scope.row.dtl"
                    target="_blank"
                    class="buttonText">详情</a>
               </template>
@@ -497,8 +497,8 @@
                 width="60">
             </el-table-column>
             <el-table-column
-                prop="description"
-                label="描述">
+                prop="title"
+                label="简要描述">
             </el-table-column>
           </el-table>
           <el-pagination
@@ -549,13 +549,13 @@ export default {
         ["丐","丐哥","丐姐","丐萝","丐太"],
         ["喵","喵哥","喵姐","喵萝","喵太"],
         ["炮","炮哥","炮姐","炮萝","炮太"],
-        ["毒","毒姐","毒哥","毒萝","毒太"],
+        ["毒","毒哥","毒姐","毒萝","毒太"],
         ["二","二少","二小姐","叽萝","叽太"],
         ["军","军爷","军娘","军萝","军太"],
         ["道","道长","道姑","咩萝","咩太"],
         ["","大师","","","小和尚"],
         ["秀","秀","秀姐","秀萝","秀太"],
-        ["花","花姐","花哥","花萝","花太"],
+        ["花","花哥","花姐","花萝","花太"],
         ["伞","伞爹","伞娘","伞萝","伞太"],
         ["雪","雪爹","雪娘","雪萝","雪太"],
         ["灯","灯爹","灯姐","灯萝","灯太"],
@@ -763,6 +763,7 @@ export default {
       // historyAdd(news);
 
       axios.post('http://47.98.63.86:8081/query', {
+      // axios.post('http://localhost:8081/query', {
             "strings": condition,
             "pageNum": that.pageNum,
             "pageSize": that.pageSize,
