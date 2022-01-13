@@ -23,7 +23,9 @@
         <p>体型</p>
         <select id="sect" class="form-control search-sel" style="margin-right: 10px;">
           <option value="0" name="全部门派">全部门派</option>
-          <option value="17" name="大侠">大侠</option>
+          <option value="18" name="大侠">大侠</option>
+          <option value="17" name="北天药宗">北天药宗</option>
+
           <option value="16" name="衍天宗">衍天宗</option>
           <option value="15" name="凌雪阁">凌雪阁</option>
           <option value="14" name="蓬莱">蓬莱</option>
@@ -559,6 +561,7 @@ export default {
         ["伞","伞爹","伞娘","伞萝","伞太"],
         ["雪","雪爹","雪娘","雪萝","雪太"],
         ["灯","灯爹","灯姐","灯萝","灯太"],
+        ["药","药爹","药姐","药萝","药太"],
         ["侠","侠男","侠女","侠萝","侠太"]],
       totleNum: 1,
       // 当前页
